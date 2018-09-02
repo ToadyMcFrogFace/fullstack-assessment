@@ -19,6 +19,16 @@ def read_events():
 	events = db.events.find()
 	return dumps(events)
 
+
+
+@app.route('/api/v1.0/event/<string:event_id>', methods=['GET'])
+def read_one_event(event_id):
+	# todo test for no event found, throw error
+	event = db.events.find_one({'_id': ObjectId(event_id)})
+	return dumps(event)
+
+
+
 @app.route('/api/v1.0/event', methods=['POST'])
 def create_event():
 	# return jsonify({'request': request.json})
@@ -54,10 +64,11 @@ def create_event():
 	event_id = db.events.insert(event)
 	new_event = db.events.find_one({'_id': event_id})
 	return dumps(new_event)
+	
 
 
 @app.route('/api/v1.0/event/<string:event_id>', methods=['DELETE'])
-def update_event(event_id):
+def delete_event(event_id):
 	# event_id = '"$oid": "5b8ae036fcc6ec3188e65685"'
 	event = db.events.delete_many({'_id': ObjectId(event_id)})
 	return jsonify({'result': True})

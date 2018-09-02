@@ -16,6 +16,10 @@ export class ApiService {
 	getEvents() {
 		return  this.httpClient.get(`${this.API_URL}/events`);
 	}
+	
+	getEvent(id) {
+		return  this.httpClient.get(`${this.API_URL}/event/${id}`);
+	}
 
 	createEvent(event) {
 		return  this.httpClient.post(`${this.API_URL}/event`, event);

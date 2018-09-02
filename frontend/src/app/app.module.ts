@@ -11,6 +11,7 @@ import { HttpClientModule } from  '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { EventViewComponent } from './event-view/event-view.component';
 // import { MapComponent } from './map/map.component';
 
 
@@ -18,7 +19,8 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 	declarations: [
 		AppComponent,
 		EventListComponent,
-		EventCreateComponent
+		EventCreateComponent,
+		EventViewComponent
 	],
 	imports: [
 		BrowserModule,
