@@ -8,9 +8,12 @@ FROM python:3.7
 
 RUN python -m pip install --upgrade pip
 
-RUN pip install tornado
+# RUN pip install tornado
 
 RUN python -m pip install pymongo
+
+RUN pip install flask 
+RUN pip install flask-cors
 
 
 
