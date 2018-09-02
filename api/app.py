@@ -13,28 +13,6 @@ pprint(serverStatusResult)
 app = Flask(__name__)
 CORS(app)
 
-# @app.route("/")
-# def main():
-# 	return render_template('index.html')
-
-# if __name__ == "__main__":
-# 	app.run(debug=True, host="0.0.0.0", port=80)
-
-# tasks = [
-#     {
-#         'id': 1,
-#         'title': u'Buy groceries',
-#         'description': u'Milk, Cheese, Pizza, Fruit, Tylenol', 
-#         'done': False
-#     },
-#     {
-#         'id': 2,
-#         'title': u'Learn Python',
-#         'description': u'Need to find a good Python tutorial on the web', 
-#         'done': False
-#     }
-# ]
-
 #Event Routes
 @app.route('/api/v1.0/events', methods=['GET'])
 def read_events():
@@ -47,21 +25,36 @@ def create_event():
 	if not request.json or not 'name' in request.json:
 		abort(400)
 
+	# sort geolocations by date
+	geolocations = request.json['geolocations'];
+	geolocations.sort(key=lambda x: x['date'].split('-'));
+
+	# get start and end date from geolocations dates
+	start_date = geolocations[0]['date'];
+	end_date = geolocations[len(geolocations) -1]['date'];
+
 	#todo success code 200, or relavant
 	event = {
 		'name': request.json['name'],
-		'start_date': request.json['start_date'],
-		'end_date': request.json['end_date']
+		'start_date': start_date,
+		'end_date': end_date,
+		'geolocations': []
 	}
+
+	for geolocation in geolocations:
+		# geo = 
+		event['geolocations'].append({
+			'lat': geolocation['lat'],
+			'long': geolocation['long'],
+			'date': geolocation['date'],
+			# todo: checkout for source
+			'source': 'browser'
+		});
+
 	event_id = db.events.insert(event)
 	new_event = db.events.find_one({'_id': event_id})
 	return dumps(new_event)
-	# output = {
-	# 	'name': new_event['name'], 
-	# 	'start_date': new_event['start_date'],
-	# 	'end_date': new_event['end_date']
-	# }
-	# return jsonify({'result' : output})
+
 
 @app.route('/api/v1.0/event/<string:event_id>', methods=['DELETE'])
 def update_event(event_id):

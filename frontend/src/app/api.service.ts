@@ -13,7 +13,11 @@ export class ApiService {
 
 	constructor(private  httpClient:  HttpClient) { }
 	
-	getEvents(){
+	getEvents() {
 		return  this.httpClient.get(`${this.API_URL}/events`);
+	}
+
+	createEvent(event) {
+		return  this.httpClient.post(`${this.API_URL}/event`, event);
 	}
 }
