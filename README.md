@@ -17,7 +17,7 @@ cd into frontend and run `ng serve`.
 the project will be on `http://localhost:4200/`
 
 ### Python rest api
-You wil need Python 3.7 installed locally. 
+You wil need Python 3.7 and pip installed locally. 
 Once you have that you need to install a few python packages. run the commands below
 `python -m pip install pymongo`
 `pip install flask`
@@ -44,6 +44,6 @@ I was going to add a google places search bar above the google map, so you can j
 Also there are 2 arrays containing data about the geolocations, 
 One with the google maps marker objects. The other with only the lat and long. Preferably this would just be in one array. That way I could make the pins draggable (you can see it commented out in the code) and the lat/lng would update dynamically.
 
-Also there is no way to tell which date input is for what pin. 
-I would add on hover of date input, map would center to associated pin.
+Also there is no way to tell which date input is for what pin. I would add on hover of date input, map would center to associated pin.
 
+And there are no failure messages, post loading icons, front end validations, styles or responsive.
