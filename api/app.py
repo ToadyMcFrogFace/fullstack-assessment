@@ -5,6 +5,7 @@ from pprint import pprint
 from bson.json_util import dumps
 from bson.objectid import ObjectId
 
+# todo, move hostname to docker conf 
 client = MongoClient('localhost', 27017)
 db = client.assessment
 serverStatusResult = db.command("serverStatus")
@@ -52,7 +53,6 @@ def create_event():
 	}
 
 	for geolocation in geolocations:
-		# geo = 
 		event['geolocations'].append({
 			'lat': geolocation['lat'],
 			'long': geolocation['long'],
@@ -69,7 +69,6 @@ def create_event():
 
 @app.route('/api/v1.0/event/<string:event_id>', methods=['DELETE'])
 def delete_event(event_id):
-	# event_id = '"$oid": "5b8ae036fcc6ec3188e65685"'
 	event = db.events.delete_many({'_id': ObjectId(event_id)})
 	return jsonify({'result': True})
 
@@ -77,5 +76,5 @@ def delete_event(event_id):
 
 if __name__ == '__main__':
 	# app.run(debug=True, host="0.0.0.0", port=80)
-	app.run(debug=True)
+	app.run(debug=True, port=5000)
 

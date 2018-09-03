@@ -4,25 +4,13 @@ Create Event
 <button (click)="createEvent()">
     Create Event
 </button>
+<br>
 
- 
-<!-- <agm-map [(latitude)]="location.lat" [(longitude)]="location.lng" [(zoom)]="location.zoom" [disableDefaultUI]="true" [zoomControl]="true" [(fitBounds)]='location.viewport'>
-  <agm-marker [(latitude)]="location.marker.lat" [(longitude)]="location.marker.lng" [markerDraggable]="location.marker.draggable" (dragEnd)='markerDragEnd($event)'></agm-marker>
-</agm-map> -->
-<!-- 
-    <button (click)="decrement()">-</button>
-    <span>{{counter}}</span>
-    <button (click)="increment()">+</button>
-
-     <button (click)="changeUserName()">Change User Name {{user | json}}</button> -->
 <form action="">
-	<label for="name">Event Name</label>
+	<label for="name" id="hacks">Event Name</label>
 	<input [(ngModel)]="event.name" type="text" name="name">
-	<label for="start_date">Start Date</label>
-	<input [(ngModel)]="event.start_date" type="date" name="start_date">
-	<label for="end_date">End Date</label>
-	<input [(ngModel)]="event.end_date" type="date" name="end_date">
 </form>
+<br>
 
 <div style="width: 100%">
 	<div #gmap style="width:50%;height:400px; float:left"></div>
@@ -30,9 +18,18 @@ Create Event
 		<!-- {{markers | json}} -->
 		<ul>
 			<li  *ngFor="let geolocation of geolocations">
-				hello {{geo | json}}
+				{{geo | json}}
 				<input [(ngModel)]="geolocation.date" type="datetime-local">
 			</li>
 		</ul>
 	</div>
+</div>
+
+<div style="width: 100%; float: right">
+	<br><br>
+	NOTE:
+	Click on the map to add geolocation. <br>
+	Right click on pins to remove them <br>
+	After placing or removing pins,
+	Click in then out of the event name input box
 </div>

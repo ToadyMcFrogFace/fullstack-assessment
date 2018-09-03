@@ -1,12 +1,39 @@
-version: '3'
+version: '2'
 services:
   python:
-    # image: trinitronx/python-simplehttpserver
-
     build:
-      context: docker/python
+      context: api
       dockerfile: Dockerfile
     volumes:
-      - .:/var/www
+      - ./api:/usr/src/app
     ports:
-      - "8080:8080"
+      - "5000:5000"
+    working_dir: /usr/src/app
+    links:
+      - mongo
+
+# todo, set up reverse proxy
+# To run rest-api and frontend 
+  # nginx:
+  #   image: nginx:1.10
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - ./default.conf:/etc/nginx/conf.d/default.conf
+  #   tty: true
+
+  angular:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/usr/src/app
+    ports:
+      - 4200:4200
+
+  mongo:
+      image: mongo:4
+      # volumes:
+      #   - ./data/db:/data/db
+      ports:
+          - 27017:27017

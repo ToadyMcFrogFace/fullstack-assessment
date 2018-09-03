@@ -57,6 +57,9 @@ export class EventCreateComponent implements OnInit {
 		this.geolocations.push(geolocation);
 
 		google.maps.event.addListener(marker, 'rightclick', () => this.removeMarker(marker));
+
+		// hacks
+		document.getElementById("hacks").click();
 	}
 
 	removeMarker(marker) {
